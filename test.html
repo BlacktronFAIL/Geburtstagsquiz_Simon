@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Testfrage – Steam Quiz</title>
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .quiz-box {
+            background-color: #003366;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .answer-button {
+            display: block;
+            background-color: #0055a5;
+            border: none;
+            margin: 10px auto;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<audio autoplay loop>
+  <source src="quiz-music.mp3" type="audio/mpeg">
+  Dein Browser unterstützt kein Audio.
+</audio>
+<h1>Testfrage</h1>
+<div class="quiz-box">
+    <h2>In welchem Jahr fand das bisher einzige Doppel-Schwertwolf-Lager statt?</h2>
+    <button class="answer-button" onclick="checkAnswer('2012')">2012</button>
+<button class="answer-button" onclick="checkAnswer('2013')">2013</button>
+<button class="answer-button" onclick="checkAnswer('2014')">2014</button>
+<button class="answer-button" onclick="checkAnswer('2015')">2015</button>
+    <div id="result" style="margin-top:20px; font-weight: bold;"></div>
+</div>
+<script>
+function checkAnswer(answer) {
+    if (answer === "2013") {
+        document.getElementById("result").innerHTML = "✅ Richtig! Dein Code: <br><br>Kein Code – Testfrage";
+    } else {
+        document.getElementById("result").innerHTML = "❌ Falsch. Versuch es später nochmal.";
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag 2 – Steam Quiz</title>
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .quiz-box {
+            background-color: #003366;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .answer-button {
+            display: block;
+            background-color: #0055a5;
+            border: none;
+            margin: 10px auto;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<audio autoplay loop>
+  <source src="quiz-music.mp3" type="audio/mpeg">
+  Dein Browser unterstützt kein Audio.
+</audio>
+<h1>Tag 2</h1>
+<div class="quiz-box">
+    <h2>Egal, wo du auf der Welt dein Auto abstellst, wie verinnerlichst du den Abstellort?</h2>
+    <button class="answer-button" onclick="checkAnswer('Klar, mit Google Maps')">Klar, mit Google Maps</button>
+<button class="answer-button" onclick="checkAnswer('Du machst ein Foto vom nächsten Straßenschild')">Du machst ein Foto vom nächsten Straßenschild</button>
+<button class="answer-button" onclick="checkAnswer('Du verlässt dich auf dein untrügliches Navigationsgeschick und findest den Weg zurück')">Du verlässt dich auf dein untrügliches Navigationsgeschick und findest den Weg zurück</button>
+<button class="answer-button" onclick="checkAnswer('Du merkst dir, dass du neben einer großen Weide parkst')">Du merkst dir, dass du neben einer großen Weide parkst</button>
+    <div id="result" style="margin-top:20px; font-weight: bold;"></div>
+</div>
+<script>
+function checkAnswer(answer) {
+    if (answer === "Du merkst dir, dass du neben einer großen Weide parkst") {
+        document.getElementById("result").innerHTML = "✅ Richtig! Dein Code: <br><br>Q8YQJ-83TYY-2LHW7";
+    } else {
+        document.getElementById("result").innerHTML = "❌ Falsch. Versuch es später nochmal.";
+    }
+}
+</script>
+</body>
+</html>

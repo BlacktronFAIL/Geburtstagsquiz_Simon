@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag 7 – Steam Quiz</title>
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .quiz-box {
+            background-color: #003366;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .answer-button {
+            display: block;
+            background-color: #0055a5;
+            border: none;
+            margin: 10px auto;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<audio autoplay loop>
+  <source src="quiz-music.mp3" type="audio/mpeg">
+  Dein Browser unterstützt kein Audio.
+</audio>
+<h1>Tag 7</h1>
+<div class="quiz-box">
+    <h2>Welchen Auftrag bekommt ein Kirchenmaler am besten bezahlt?</h2>
+    <button class="answer-button" onclick="checkAnswer('Dem heiligen Nepomuk den Ständer richtig polieren')">Dem heiligen Nepomuk den Ständer richtig polieren</button>
+<button class="answer-button" onclick="checkAnswer('Dem Erzengel die Flöte nachschieben')">Dem Erzengel die Flöte nachschieben</button>
+<button class="answer-button" onclick="checkAnswer('Die heilige Ursula von der Seite kacheln')">Die heilige Ursula von der Seite kacheln</button>
+<button class="answer-button" onclick="checkAnswer('Die Maria hinterm Altar umlegen und die Ritze verkitten')">Die Maria hinterm Altar umlegen und die Ritze verkitten</button>
+    <div id="result" style="margin-top:20px; font-weight: bold;"></div>
+</div>
+<script>
+function checkAnswer(answer) {
+    if (answer === "Die Maria hinterm Altar umlegen und die Ritze verkitten") {
+        document.getElementById("result").innerHTML = "✅ Richtig! Dein Code: <br><br>CP7HI-VXAMK-AV58Y + 0VETN-RICQG-HIQKM + AGVJQ-JJ5KZ-4JD87";
+    } else {
+        document.getElementById("result").innerHTML = "❌ Falsch. Versuch es später nochmal.";
+    }
+}
+</script>
+</body>
+</html>
