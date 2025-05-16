@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag 7 – Pfeiltasten-Strafe mit Timer</title>
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .arrow-sequence {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .input-progress {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .arrow-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .arrow-buttons button {
+            font-size: 32px;
+            padding: 20px;
+            width: 70px;
+            height: 70px;
+        }
+        .hidden {
+            display: none;
+        }
+        .quiz-box {
+            background-color: #003366;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        #timer {
+            font-size: 22px;
+            margin: 15px 0;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<audio id="quizMusic" autoplay loop><source src="quiz-music.mp3" type="audio/mpeg"></audio>
+<audio id="stressMusic" loop><source src="stress-music.mp3" type="audio/mpeg"></audio>
+<h1>Tag 7</h1>
+<div class="quiz-box">
+    <h2>Frage:</h2>
+    <p>Welchen Auftrag bekommt ein Kirchenmaler am besten bezahlt?</p>
+    <div>
+        <button onclick="checkAnswer('Gaaaandalf, mein lieber Gandalf!')">A: Gaaaandalf, mein lieber Gandalf!</button><br><br>
+        <button onclick="checkAnswer('Die Maria hinterm Altar umlegen und die Ritze verkitten')">B: Die Maria hinterm Altar umlegen und die Ritze verkitten</button><br><br>
+        <button onclick="checkAnswer('Aufmachen, Drogenfahndung!')">C: Aufmachen, Drogenfahndung!</button><br><br>
+        <button onclick="checkAnswer('Hmm, war wohl der Wind...')">D: Hmm, war wohl der Wind...</button>
+    </div>
+    <div id="quiz-result" style="margin-top: 20px; font-weight: bold;"></div>
+</div>
+
+<div id="punishment" class="hidden">
+    <h2>❌ Falsch! Tippe diese Pfeilfolge korrekt:</h2>
+    <div class="arrow-sequence" id="arrow-sequence"></div>
+    <div id="timer">⏳ Zeit: <span id="time">20</span> Sekunden</div>
+    <div class="arrow-buttons" id="arrow-buttons"></div>
+    <div class="input-progress" id="progress"></div>
+</div>
+
+<script>
+let correctAnswer = "Die Maria hinterm Altar umlegen und die Ritze verkitten";
+let sequence = [];
+let input = [];
+let symbols = ["↑", "↓", "←", "→"];
+let timer;
+let baseTime = 10;
+let timeLeft = baseTime;
+let fails = 0;
+
+function checkAnswer(ans) {
+    if (ans === correctAnswer) {
+        document.getElementById("quiz-result").innerHTML = "✅ Richtig! Dein Code: <br><br>CP7HI-VXAMK-AV58Y + 0VETN-RICQG-HIQKM + AGVJQ-JJ5KZ-4JD87";
+    } else {
+        document.querySelector(".quiz-box").classList.add("hidden");
+        document.getElementById("punishment").classList.remove("hidden");
+        document.getElementById("quizMusic").pause();
+        document.getElementById("stressMusic").play();
+        generateSequence();
+        renderButtons();
+        startTimer();
+    }
+}
+
+function generateSequence() {
+    sequence = [];
+    for (let i = 0; i < 12; i++) {
+        let sym = symbols[Math.floor(Math.random() * symbols.length)];
+        sequence.push(sym);
+    }
+    document.getElementById("arrow-sequence").innerText = sequence.join(" ");
+    input = [];
+    document.getElementById("progress").innerText = "Fortschritt: 0/12";
+}
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
+function renderButtons() {
+    const container = document.getElementById("arrow-buttons");
+    container.innerHTML = "";
+    let shuffled = shuffle([...symbols]);
+    shuffled.forEach(sym => {
+        const btn = document.createElement("button");
+        btn.textContent = sym;
+        btn.onclick = () => submitArrow(sym);
+        container.appendChild(btn);
+    });
+}
+
+function submitArrow(arrow) {
+    input.push(arrow);
+    let current = input.length - 1;
+    if (input[current] !== sequence[current]) {
+        alert("❌ Falsch gedrückt! Zurück an den Anfang!");
+        resetChallenge();
+        return;
+    }
+    document.getElementById("progress").innerText = `Fortschritt: ${input.length}/12`;
+    if (input.length === sequence.length) {
+        alert("✅ Na gut... du darfst nochmal zur Frage zurück.");
+        clearInterval(timer);
+        document.getElementById("stressMusic").pause();
+        document.getElementById("stressMusic").currentTime = 0;
+        document.getElementById("quizMusic").play();
+        location.reload();
+    } else {
+        renderButtons(); // shuffle buttons again
+    }
+}
+
+function startTimer() {
+    timeLeft = baseTime;
+    document.getElementById("time").innerText = timeLeft;
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("time").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            alert("⏳ Zeit abgelaufen! Nochmal von vorn!");
+            resetChallenge();
+        }
+    }, 1000);
+}
+
+function resetChallenge() {
+    fails++;
+    if (fails % 3 === 0) baseTime++;
+
+    clearInterval(timer);
+    generateSequence();
+    renderButtons();
+    startTimer();
+}
+</script>
+</body>
+</html>
