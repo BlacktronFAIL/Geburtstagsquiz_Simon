@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Tag 1 – Pfeiltasten-Strafe mit Timer</title>
+    <title>Tag 2 – Pfeiltasten-Strafe mit Timer</title>
     <style>
         body {
             background-color: #001f3f;
@@ -51,8 +50,9 @@
 </head>
 <body>
 <audio id="quizMusic" autoplay loop><source src="quiz-music.mp3" type="audio/mpeg"></audio>
+<audio id="stressMusic" loop><source src="stress-music.mp3" type="audio/mpeg"></audio>
 
-<h1>Tag 1</h1>
+    <h1>Tag 1</h1>
 <div class="quiz-box">
     <h2>Frage:</h2>
     <p>Du hast gerade gemütlich die Füße hochgelegt, zündest deine Lesepfeife an und hörst plötzlich und unerwartet ein Klopfen an deiner kreisrunden Tür. Beim Blick aus dem Buntglasfenster erspähst du einen graugekleideten, großgewachsenen, bärtigen Herrn an deiner Tür. Was ist die einzig richtige Art, ihn zu begrüßen?</p>
@@ -82,10 +82,10 @@ let timer;
 let baseTime = 10;
 let timeLeft = baseTime;
 let fails = 0;
-
+    
 function checkAnswer(ans) {
     if (ans === correctAnswer) {
-        document.getElementById("quiz-result").innerHTML = "✅ Richtig! Dein Code: <br><br>5IM8T-5A2C0-4CAIT";
+        document.getElementById("quiz-result").innerHTML = "✅ Richtig! Dein Code: <br><br>Q8YQJ-83TYY-2LHW7";
     } else {
         document.querySelector(".quiz-box").classList.add("hidden");
         document.getElementById("punishment").classList.remove("hidden");
@@ -176,3 +176,8 @@ function resetChallenge() {
 </script>
 </body>
 </html>
+
+
+
+
+
